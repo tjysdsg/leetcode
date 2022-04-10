@@ -6,6 +6,5 @@ macro(add_leetcode_target target solution_class)
     target_compile_definitions(${target} PRIVATE -DSOLUTION_CLASS=${solution_class})
 endmacro()
 
-add_leetcode_target(1-two-sum-unoptimized Unoptimized)
-add_leetcode_target(1-two-sum-optimized Optimized)
-
+add_subdirectory(1-two-sum)
+add_subdirectory(13-roman-to-integer)
