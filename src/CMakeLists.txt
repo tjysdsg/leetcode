@@ -8,4 +8,5 @@ endmacro()
 
 add_subdirectory(1-two-sum)
 add_subdirectory(4-median-of-two-sorted-arrays)
+add_subdirectory(10-regular-expression-matching)
 add_subdirectory(13-roman-to-integer)
