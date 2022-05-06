@@ -6,10 +6,10 @@ SOLUTION_CLASS sol;
 
 TEST(edit_distance, 1) {
   int d = sol.minDistance("horse", "ros");
-  EXPECT_DOUBLE_EQ(d, 3);
+  EXPECT_EQ(d, 3);
 }
 
 TEST(edit_distance, 2) {
   int d = sol.minDistance("intention", "execution");
-  EXPECT_DOUBLE_EQ(d, 5);
+  EXPECT_EQ(d, 5);
 }

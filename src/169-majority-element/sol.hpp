@@ -1,4 +1,4 @@
-// https://leetcode-cn.com/problems/edit-distance/
+// https://leetcode-cn.com/problems/majority-element/
 
 #pragma once
 #include <string>
