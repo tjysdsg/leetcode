@@ -18,6 +18,8 @@ using std::map;
 using std::set;
 using std::stack;
 
+// TODO: dynamic programming
+
 class SolutionStack {
 public:
     int longestValidParentheses(string s) {
