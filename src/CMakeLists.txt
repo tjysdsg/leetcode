@@ -4,6 +4,8 @@ macro(add_leetcode_target target solution_class)
 
     target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
     target_compile_definitions(${target} PRIVATE -DSOLUTION_CLASS=${solution_class})
+    target_compile_options(${target} PRIVATE -fsanitize=address,undefined)
+    target_link_options(${target} PRIVATE -fsanitize=address,undefined)
 endmacro()
 
 add_subdirectory(1-two-sum)
@@ -26,3 +28,4 @@ add_subdirectory(1200-min-abs-difference)
 add_subdirectory(160-intersection-of-two-linked-lists)
 add_subdirectory(17-letter-combination-of-phone-number)
 add_subdirectory(31-next-permutation)
+add_subdirectory(33-search-in-rotated-sorted-array)
