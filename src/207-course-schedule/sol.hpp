@@ -32,7 +32,35 @@ using std::queue;
 class BFS {
 public:
     bool canFinish(int numCourses, vector<vector<int>> &prerequisites) {
-        return false;
+        vector<vector<int>> E(numCourses, vector<int>()); // E[i] = i -> j
+        vector<int> n_in_edges(numCourses, 0); // # of in-edges of E[i]
+
+        for (const auto &e: prerequisites) {
+            // e[1] is the prerequisite, so edge is e[1] -> e[0]
+            E[e[1]].push_back(e[0]);
+            ++n_in_edges[e[0]];
+        }
+
+        queue<int> q;
+        for (int i = 0; i < numCourses; ++i) {
+            if (!n_in_edges[i]) // only search vertices with no out-edge
+                q.push(i);
+        }
+
+        int n_visited = 0;
+        while (!q.empty()) {
+            int i = q.front();
+            q.pop();
+            ++n_visited;
+
+            for (int j: E[i]) {
+                // remove edge i -> j
+                if (--n_in_edges[j] == 0)
+                    q.push(j);
+            }
+        }
+
+        return n_visited == numCourses;
     }
 };
 
