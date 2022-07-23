@@ -24,11 +24,11 @@ using std::set;
 using std::stack;
 using std::queue;
 
-class MyStack {
+class MinStack {
 private:
     queue<int> _data{};
 public:
-    MyStack() {}
+    MinStack() {}
 
     void push(int x) {
         int n = _data.size();
