@@ -24,7 +24,7 @@ using std::set;
 using std::stack;
 using std::queue;
 
-class NB {
+class PrefixSum {
 public:
     int maxSubArray(vector<int> &nums) {
         int n = nums.size();
@@ -39,7 +39,6 @@ public:
 
             // equivalent to skipping nums[0..i] where sum(nums[0..i]) < 0 causes the overall sum to be smaller
             if (curr_sum < 0) curr_sum = 0;
-
         }
 
         return ret;
