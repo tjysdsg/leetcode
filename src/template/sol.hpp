@@ -14,6 +14,7 @@
 #include <cmath>
 #include <unordered_map>
 #include <queue>
+#include "common.h"
 
 using std::string;
 using std::cout;

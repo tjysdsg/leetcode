@@ -2,7 +2,7 @@ macro(add_leetcode_target target solution_class)
     add_executable(${target} ${TEST_CPP_FILE}) # see test/CMakeLists.txt
     target_link_libraries(${target} PRIVATE leetcode_test)
 
-    target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+    target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_LIST_DIR} ${PROJECT_SOURCE_DIR}/src)
     target_compile_definitions(${target} PRIVATE -DSOLUTION_CLASS=${solution_class})
     target_compile_options(${target} PRIVATE -fsanitize=address,undefined)
     target_link_options(${target} PRIVATE -fsanitize=address,undefined)

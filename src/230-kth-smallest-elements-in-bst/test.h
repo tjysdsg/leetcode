@@ -7,47 +7,30 @@
 
 using namespace ::testing;
 
-TEST(test, 3) {
-    SOLUTION_CLASS sol;
-
-    TreeNode *root = new TreeNode(
-            1,
-            nullptr,
-            new TreeNode(2)
-    );
-    EXPECT_EQ(sol.kthSmallest(root, 2), 2);
-}
-
 TEST(test, 1) {
     SOLUTION_CLASS sol;
 
-    TreeNode *root = new TreeNode(
-            3,
-            new TreeNode(
-                    1,
-                    nullptr,
-                    new TreeNode(2)
-            ),
-            new TreeNode(4)
-    );
+    TreeNode *root = TreeNode::from_heap({3, 1, 4, -1, 2});
     EXPECT_EQ(sol.kthSmallest(root, 1), 1);
+
+    delete root;
 }
 
 TEST(test, 2) {
     SOLUTION_CLASS sol;
 
-    TreeNode *root = new TreeNode(
-            5,
-            new TreeNode(
-                    3,
-                    new TreeNode(
-                            2,
-                            new TreeNode(1),
-                            nullptr
-                    ),
-                    new TreeNode(4)
-            ),
-            new TreeNode(6)
-    );
+    TreeNode *root = TreeNode::from_heap({5, 3, 6, 2, 4, -1, -1, 1});
     EXPECT_EQ(sol.kthSmallest(root, 3), 3);
+
+    delete root;
 }
+
+TEST(test, 3) {
+    SOLUTION_CLASS sol;
+
+    TreeNode *root = TreeNode::from_heap({1, -1, 2});
+    EXPECT_EQ(sol.kthSmallest(root, 2), 2);
+
+    delete root;
+}
+
