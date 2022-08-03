@@ -111,4 +111,28 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
 
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+
+    static ListNode *from_array(std::vector<int> v) {
+        ListNode fake;
+
+        auto *prev = &fake;
+        for (int e: v) {
+            prev->next = new ListNode(e);
+            prev = prev->next;
+        }
+
+        return fake.next;
+    }
+
+    std::vector<int> to_array() {
+        std::vector<int> ret;
+
+        ListNode *n = this;
+        while (n) {
+            ret.push_back(n->val);
+            n = n->next;
+        }
+
+        return ret;
+    }
 };
