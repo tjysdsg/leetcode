@@ -12,6 +12,7 @@
 #include <stack>
 #include <cassert>
 #include <unordered_map>
+#include "common.h"
 
 using std::string;
 using std::cout;
@@ -20,13 +21,6 @@ using std::map;
 using std::unordered_map;
 using std::set;
 using std::stack;
-
-struct ListNode {
-    int val;
-    ListNode *next;
-
-    ListNode(int x) : val(x), next(NULL) {}
-};
 
 class Solution {
 public:
