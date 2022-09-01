@@ -51,3 +51,33 @@ public:
         return ret;
     }
 };
+
+class DP {
+public:
+    int nthUglyNumber(int n) {
+        vector<int> dp(n, 0); // dp[i] = the (i+1)-th ugly number
+
+        dp[0] = 1;
+
+        int mul_by_2_idx = 0;
+        int mul_by_3_idx = 0;
+        int mul_by_5_idx = 0;
+
+        for (int i = 1; i < n; ++i) {
+            int by2 = dp[mul_by_2_idx] * 2;
+            int by3 = dp[mul_by_3_idx] * 3;
+            int by5 = dp[mul_by_5_idx] * 5;
+
+            int ugly = std::min(by2, std::min(by3, by5));
+            dp[i] = ugly;
+            if (by2 == ugly)
+                ++mul_by_2_idx;
+            if (by3 == ugly)
+                ++mul_by_3_idx;
+            if (by5 == ugly)
+                ++mul_by_5_idx;
+        }
+
+        return dp[n - 1];
+    }
+};
