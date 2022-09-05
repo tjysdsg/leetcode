@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <queue>
+#include <bitset>
 
 using std::string;
 using std::cout;
@@ -27,6 +28,7 @@ using std::stack;
 using std::queue;
 using std::priority_queue;
 using std::pair;
+using std::bitset;
 
 struct TreeNode {
     int val;
