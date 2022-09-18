@@ -16,24 +16,12 @@ TEST(three_sum, 1) {
 }
 
 TEST(three_sum, 2) {
-    vector<int> v{};
-    auto res = sol.threeSum(v);
-    EXPECT_TRUE(res.empty());
-}
-
-TEST(three_sum, 3) {
-    vector<int> v{0};
-    auto res = sol.threeSum(v);
-    EXPECT_TRUE(res.empty());
-}
-
-TEST(three_sum, 4) {
     vector<int> v{1, 2, -2, -1};
     auto res = sol.threeSum(v);
     EXPECT_TRUE(res.empty());
 }
 
-TEST(three_sum, 5) {
+TEST(three_sum, 3) {
     vector<int> v{1, -1, -1, 0};
     auto res = sol.threeSum(v);
     vector<int> e0{-1, 0, 1};

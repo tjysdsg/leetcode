@@ -22,12 +22,15 @@ public:
         std::sort(nums.begin(), nums.end());
 
         int n = nums.size();
+        if (nums[0] > 0 || nums[n - 1] < 0) return {};
         vector<vector<int>> ret;
+
+        // a = nums[i], b = nums[j], c = nums[k]
 
         int prev_a = -999999;
         for (int i = 0; i < n - 2; ++i) {
             int a = nums[i];
-            if (prev_a == a) continue;
+            if (prev_a == a) continue; // in case nums = {0, 0, ..., 0}
             prev_a = a;
 
             int prev_b = -999999;
@@ -41,13 +44,14 @@ public:
                 prev_b = b;
 
                 while (j < k) {
-                    if (a + b + nums[k] < 0) break;
-                    if (prev_c != nums[k] && 0 == a + b + nums[k]) {
-                        ret.push_back({a, b, nums[k]});
-                        prev_c = nums[k];
+                    int c = nums[k];
+                    if (a + b + c < 0) break;
+                    if (prev_c != c && 0 == a + b + c) {
+                        ret.push_back({a, b, c});
+                        prev_c = c;
                         break;
                     }
-                    prev_c = nums[k];
+                    prev_c = c;
                     --k;
                 }
             }
