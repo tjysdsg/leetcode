@@ -29,7 +29,6 @@ public:
     }
 
     int binary_search(vector<int> &nums, int i, int j, int target) {
-        // base condition
         if (i >= j)
             return nums[i] == target ? i : -1;
 
@@ -37,7 +36,6 @@ public:
         int mid = (i + j) / 2;
         if (nums[mid] == target) return mid;
 
-        // search both left and right parts
         int r = std::max(i, mid - 1);
         int l = std::min(mid + 1, j);
 
