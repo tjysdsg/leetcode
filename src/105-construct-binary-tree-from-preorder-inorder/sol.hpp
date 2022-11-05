@@ -4,7 +4,36 @@
 
 #include "common.h"
 
-class Solution {
+class Iterative {
+public:
+    TreeNode *buildTree(const vector<int> &preorder, const vector<int> &inorder) {
+        int left_bound = 0;
+        stack<TreeNode *> s{};
+
+        auto *root = new TreeNode(preorder[0]);
+        s.push(root);
+        for (int i = 1; i < preorder.size(); ++i) {
+            assert(!s.empty());
+            auto *node = new TreeNode(preorder[i]);
+            if (inorder[left_bound] == s.top()->val) {
+                TreeNode* parent = nullptr;
+                while (!s.empty() && inorder[left_bound] == s.top()->val) {
+                    ++left_bound;
+                    parent = s.top();
+                    s.pop();
+                }
+                assert(parent);
+                parent->right = node;
+            } else {
+                s.top()->left = node;
+            }
+            s.push(node);
+        }
+        return root;
+    }
+};
+
+class Recursive {
     unordered_map<int, int> inorder2idx{};
 
 public:
