@@ -4,8 +4,35 @@
 
 #include "common.h"
 
-// TODO: save max values
 class Solution {
+public:
+    TreeNode *constructMaximumBinaryTree(vector<int> &nums) {
+        stack<TreeNode *> s{};
+
+        TreeNode *ret = nullptr;
+        for (int i: nums) {
+            auto *node = new TreeNode(i);
+            if (s.empty()) {
+                ret = node;
+            }
+
+            while (!s.empty() && s.top()->val < i) {
+                node->left = s.top();
+                s.pop();
+            }
+            if (!s.empty())
+                s.top()->right = node;
+            else
+                ret = node;
+
+            s.push(node);
+        }
+
+        return ret;
+    }
+};
+
+class Recursion {
 public:
     TreeNode *constructMaximumBinaryTree(vector<int> &nums) {
         return build(nums, 0, nums.size() - 1);
