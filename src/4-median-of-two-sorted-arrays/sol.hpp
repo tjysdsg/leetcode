@@ -2,15 +2,9 @@
 
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <vector>
+#include "common.h"
 
-using std::string;
-using std::cout;
-using std::vector;
-
-class Unoptimized {
+class BinarySearch {
 public:
     double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) {
         int m = nums1.size();
@@ -26,9 +20,9 @@ public:
         int curr = 0;
         double ret = 0;
         for (int idx = 0;; ++idx) {
-            int num1 = INT_MAX;
+            int num1 = INT32_MAX;
             if (p1 < m) num1 = nums1[p1];
-            int num2 = INT_MAX;
+            int num2 = INT32_MAX;
             if (p2 < n) num2 = nums2[p2];
 
             if (num1 < num2) {
@@ -44,7 +38,6 @@ public:
             if (idx == target2)
                 return (ret + curr) / 2;
         }
-        return 0;
     }
 };
 
@@ -66,10 +59,10 @@ public:
             int i = (low + high) / 2;
             int j = (m + n + 1) / 2 - i;
 
-            int a_part1_max = i == 0 ? INT_MIN : nums1[i - 1];
-            int a_part2_min = i == m ? INT_MAX : nums1[i];
-            int b_part1_max = j == 0 ? INT_MIN : nums2[j - 1];
-            int b_part2_min = j == n ? INT_MAX : nums2[j];
+            int a_part1_max = i == 0 ? INT32_MIN : nums1[i - 1];
+            int a_part2_min = i == m ? INT32_MAX : nums1[i];
+            int b_part1_max = j == 0 ? INT32_MIN : nums2[j - 1];
+            int b_part2_min = j == n ? INT32_MAX : nums2[j];
 
             if (a_part1_max <= b_part2_min) {
                 part1_max = std::max(a_part1_max, b_part1_max);
