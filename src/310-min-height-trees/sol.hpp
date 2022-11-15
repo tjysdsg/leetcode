@@ -4,6 +4,58 @@
 
 #include "common.h"
 
+class TopologicalSort {
+    unordered_map<int, vector<int>> edge_map{};
+    vector<int> degree{};
+
+public:
+    vector<int> findMinHeightTrees(int n, vector<vector<int>> &edges) {
+        if (n <= 1) return {0};
+
+        degree = vector<int>(n, 0);
+        for (const auto &e: edges) {
+            edge_map[e[0]].push_back(e[1]);
+            edge_map[e[1]].push_back(e[0]);
+            ++degree[e[0]];
+            ++degree[e[1]];
+        }
+
+        queue<int> q{};
+        for (int i = 0; i < n; ++i) {
+            if (degree[i] == 1)
+                q.push(i);
+        }
+        int remain_node = n;
+        while (!q.empty() && remain_node > 2) {
+            int size = q.size();
+            remain_node -= size;
+
+            for (int _ = 0; _ < size; ++_) {
+                int i = q.front();
+                q.pop();
+
+                assert(degree[i] == 1);
+                degree[i] = 0;
+
+                auto it = edge_map.find(i);
+                if (it != edge_map.end()) {
+                    for (int j: it->second) {
+                        if (--degree[j] == 1)
+                            q.push(j);
+                    }
+                }
+            }
+        }
+
+        vector<int> ret = {};
+        while (!q.empty()) {
+            ret.push_back(q.front());
+            q.pop();
+        }
+        return ret;
+    }
+};
+
 class DFS {
     unordered_map<int, vector<int>> edge_map{};
 
