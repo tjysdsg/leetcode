@@ -43,7 +43,7 @@ public:
 
         queue<int> q;
         for (int i = 0; i < numCourses; ++i) {
-            if (!n_in_edges[i]) // only search vertices with no out-edge
+            if (!n_in_edges[i]) // only search vertices with no in-edge (prerequisite)
                 q.push(i);
         }
 
@@ -67,13 +67,15 @@ public:
 };
 
 class DFS {
+    vector<vector<int>> E{}; // E[i] = vertices j that i -> j
+    vector<int> status{}; // status[i]: 0 = not visited, 1 = visiting, 2 = visited
+    vector<int> ret{};
+
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>> &prerequisites) {
-        vector<int> ret{};
         ret.reserve(numCourses);
-
-        vector<vector<int>> E(numCourses, vector<int>()); // E[i] = vertices j that i -> j
-        vector<int> status(numCourses, 0); // status[i]: 0 = not visited, 1 = visiting, 2 = visited
+        E = vector<vector<int>>(numCourses, vector<int>());
+        status = vector<int>(numCourses, 0);
 
         for (const auto &e: prerequisites) {
             // e[1] is the prerequisite, so edge is e[1] -> e[0]
@@ -82,28 +84,29 @@ public:
 
         bool valid = true;
         for (int i = 0; i < numCourses; ++i) {
-            valid &= dfs(i, E, status, ret);
+            valid &= dfs(i);
             if (!valid) break;
         }
 
-        if (valid)
+        if (valid) {
             std::reverse(ret.begin(), ret.end());
-        else
-            ret.clear();
-        return ret;
+            return ret;
+        } else {
+            return {};
+        }
     }
 
-    bool dfs(int i, const vector<vector<int>> &E, vector<int> &status, vector<int> &sched) {
+    bool dfs(int i) {
         if (2 == status[i]) return true;
         if (1 == status[i]) return false; // cycle detected
 
         status[i] = 1;
         for (int j: E[i]) {
-            if (!dfs(j, E, status, sched)) return false;
+            if (!dfs(j)) return false;
         }
         status[i] = 2;
 
-        sched.push_back(i);
+        ret.push_back(i);
         return true;
     }
 };
