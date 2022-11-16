@@ -18,3 +18,15 @@ TEST(test, 2) {
     vector<int> v{3, 3, 7, 7, 10, 11, 11};
     EXPECT_EQ(sol.singleNonDuplicate(v), 10);
 }
+
+TEST(test, 3) {
+    SOLUTION_CLASS sol;
+    vector<int> v{3, 3, 7, 7, 11, 11, 1};
+    EXPECT_EQ(sol.singleNonDuplicate(v), 1);
+}
+
+TEST(test, 4) {
+    SOLUTION_CLASS sol;
+    vector<int> v{3, 7, 7, 11, 11};
+    EXPECT_EQ(sol.singleNonDuplicate(v), 3);
+}
