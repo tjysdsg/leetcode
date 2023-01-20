@@ -25,8 +25,10 @@ using std::stack;
 class Solution {
 public:
     /**
-     * Find nums[i] and nums[j], where i < j, nums[i] < nums[j], and they are the rightmost number possible, swap them,
-     * and sort the digits after j-th position (to sort we only need to reverse the digit sequence).
+     * 1. Find the largest i and j such that i < j and nums[i] < nums[j]
+     * 2. Swap them (thus making the entire number bigger)
+     * 3. Sort the digits after j-th position (equivalent to reversing the digit subsequence,
+     *    because we've already checked that any subsequence after j-th position is not increasing)
      */
     void nextPermutation(vector<int> &nums) {
         int n = nums.size();
@@ -35,7 +37,7 @@ public:
             --i;
         }
 
-        // i not found
+        /// special case: i not found, just reverse the sequence and return
         if (i < 0 || nums[i] >= nums[i + 1]) {
             reverse(nums, 0, n - 1);
             return;
