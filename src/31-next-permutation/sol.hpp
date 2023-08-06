@@ -2,33 +2,21 @@
 
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <cstring>
-#include <map>
-#include <set>
-#include <stack>
-#include <cassert>
-#include <cmath>
-#include <unordered_map>
-
-using std::string;
-using std::cout;
-using std::vector;
-using std::map;
-using std::unordered_map;
-using std::set;
-using std::stack;
+#include "common.h"
 
 class Solution {
 public:
     /**
-     * 1. Find the largest i and j such that i < j and nums[i] < nums[j]
-     * 2. Swap them (thus making the entire number bigger)
-     * 3. Sort the digits after j-th position (equivalent to reversing the digit subsequence,
-     *    because we've already checked that any subsequence after j-th position is not increasing)
+     * 1. Find the largest i such that elements after i are decreasing
+     * 2. Find the largest j such that i < j and nums[i] < nums[j]
+     * 3. Swap them.
+     *    - If i doesn't conform the condition from step 1,
+     *      the resulting sequence has already occurred in the previous permutation.
+     *    - If j is not the largest j, we risk skipping the next permutation.
+     * 4. Sort the digits after j-th position.
+     *    This leads to a min value that is larger than the previous permutation.
+     *    This is equivalent to reversing the digit subsequence
+     *    because according step 1 and 2 all elements after j-th position are not increasing
      */
     void nextPermutation(vector<int> &nums) {
         int n = nums.size();
@@ -37,7 +25,7 @@ public:
             --i;
         }
 
-        /// special case: i not found, just reverse the sequence and return
+        // special case: i not found, just reverse the sequence and return
         if (i < 0 || nums[i] >= nums[i + 1]) {
             reverse(nums, 0, n - 1);
             return;
