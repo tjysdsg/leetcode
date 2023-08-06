@@ -2,31 +2,13 @@
 
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <cstring>
-#include <map>
-#include <set>
-#include <stack>
-#include <cassert>
-#include <unordered_map>
-
-using std::string;
-using std::cout;
-using std::vector;
-using std::map;
-using std::unordered_map;
-using std::set;
-using std::stack;
+#include "common.h"
 
 class Solution {
 public:
     // modified quicksort
     // descending
     // only sorts that parts that contains k-th element
-    // TODO: another version of quicksort https://en.wikipedia.org/wiki/Quicksort
     int partial_sort(vector<int> &nums, int l, int r, int k) {
         int pivot = 0;
         if (l >= 0 && r >= 0 && l < r)
