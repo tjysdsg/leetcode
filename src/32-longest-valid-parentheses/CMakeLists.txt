@@ -1,1 +1,1 @@
-add_leetcode_target(32-longest-valid-parenthesis-stack SolutionStack)
+add_leetcode_target(32-longest-valid-parenthesis Solution)

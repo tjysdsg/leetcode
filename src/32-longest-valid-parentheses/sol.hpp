@@ -2,23 +2,48 @@
 
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <cstring>
-#include <map>
-#include <set>
-#include <stack>
+#include "common.h"
 
-using std::string;
-using std::cout;
-using std::vector;
-using std::map;
-using std::set;
-using std::stack;
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        int ret = 0;
+        int n_open = 0;
+        int n_close = 0;
 
-// TODO: dynamic programming
+        for (char c: s) {
+            if (c == '(') {
+                ++n_open;
+            } else { // if (c == ')') {
+                ++n_close;
+            }
+
+            if (n_open == n_close) {
+                ret = std::max(ret, n_open + n_close);
+            } else if (n_close > n_open) {
+                n_open = n_close = 0;
+            }
+        }
+
+        n_open = n_close = 0;
+        std::reverse(s.begin(), s.end());
+        for (char c: s) {
+            if (c == '(') {
+                ++n_open;
+            } else { // if (c == ')') {
+                ++n_close;
+            }
+
+            if (n_open == n_close) {
+                ret = std::max(ret, n_open + n_close);
+            } else if (n_open > n_close) {
+                n_open = n_close = 0;
+            }
+        }
+
+        return ret;
+    }
+};
 
 class SolutionStack {
 public:
