@@ -26,35 +26,39 @@ public:
         vector<vector<int>> ret;
 
         // a = nums[i], b = nums[j], c = nums[k]
+        // a < b < c
 
-        int prev_a = -999999;
-        for (int i = 0; i < n - 2; ++i) {
+        for (int i = 0; i < n - 2;) {
             int a = nums[i];
-            if (prev_a == a) continue; // in case nums = {0, 0, ..., 0}
-            prev_a = a;
 
-            int prev_b = -999999;
-            int prev_c = -999999;
+            // use double pointers to find b and c
+            int j = i + 1;
             int k = n - 1;
-            for (int j = i + 1; j < n - 1; ++j) {
-                if (j >= k) break;
-
+            int prev;
+            while (j < k) {
                 int b = nums[j];
-                if (prev_b == b) continue;
-                prev_b = b;
+                int c = nums[k];
 
-                while (j < k) {
-                    int c = nums[k];
-                    if (a + b + c < 0) break;
-                    if (prev_c != c && 0 == a + b + c) {
-                        ret.push_back({a, b, c});
-                        prev_c = c;
-                        break;
-                    }
-                    prev_c = c;
-                    --k;
+                if (a + b + c == 0) {
+                    ret.push_back({a, b, c});
+
+                    // move left pointer to right
+                    prev = nums[j];
+                    while (j < k && prev == nums[j]) ++j;
+                    // move right pointer to left
+                    prev = nums[k];
+                    while (j < k && prev == nums[k]) --k;
+                } else if (a + b + c < 0) { // move left pointer to right
+                    prev = nums[j];
+                    while (j < k && prev == nums[j]) ++j;
+                } else { // move right pointer left
+                    prev = nums[k];
+                    while (j < k && prev == nums[k]) --k;
                 }
             }
+
+            prev = nums[i];
+            while (i < n && prev == nums[i]) ++i;
         }
 
         return ret;
